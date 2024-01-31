@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlogShip</title>
+    <link rel="stylesheet" href="~/css/layout.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div id="top" class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-rocket-takeoff"></i><i class="bi bi-caret-left"></i></a>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Login">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Registro">Registro</a>
+                    </li>
+                </ul>
+            </div>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-caret-right"></i><i class="bi bi-rocket-takeoff"></i></a>
+        </div>
+    </nav>
+    </header>
+    <div id="inicio"></div>
+    <div class="container contenido1" style="margin-top: 70px;">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="bg-light text-dark text-center py-3 mt-auto footer">
+        <div class="container">
+            <!--Le asigno una id al enlace para indicar a que parte ir
+            (este vuelve justo abajo del header al inicio de todo)-->
+            <p><a href="#inicio"><i class="bi bi-arrow-up-circle-fill"></i></a></p>
+            <p class="mb-0">© 2024 BlogShip</p>
+            <p class="mb-0">Diseñado por <a href="https://github.com/nocea" target="_blank">Mario Nocea Cabrera</a></p>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

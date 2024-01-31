@@ -1,0 +1,19 @@
+﻿/*Para hacer que el footer se mantenga abajo de la vista independientemente de cuanto contenido tenga el body*/
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+    /* Asegura que el pie de página permanezca en la parte inferior */
+    margin-top: auto;
+}
+.contenido1 {
+    flex: 1;
+}
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+

@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "CambiarContraseña";
+}
+@using Newtonsoft.Json.Linq
+@model ProyectoFinal_C.Models.Usuario
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Recuperar Contraseña</title>
+    <link rel="stylesheet" href="~/css/login_registro.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="form-container">
+        <form asp-controller="Controlador_Recuperar" asp-action="CambiarContrasena" method="post">
+            <h2 class="text-center mb-4">Recuperar Contraseña <i class="bi bi-shield-lock"></i></h2>
+            <div class="form-group">
+                <label asp-for="passwd_usuario"><i class="bi bi-asterisk"></i>Nueva Contraseña</label>
+                <div class="input-group">
+                    <input id ="password" asp-for="passwd_usuario" type="text" class="form-control" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$" required>
+                </div>
+                <label><i class="bi bi-asterisk"></i>Confirmar Contraseña</label>
+                <div class="input-group">
+                    <input id="confirmPassword" type="text" class="form-control" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$" required>
+                </div>
+                <small id="passwordHelp" class="form-text text-muted">
+                    La contraseña debe contener al menos 8 carácteres,una letra mayúscula y un número.
+                </small>
+            </div>
+            <button type="submit" class="btn btn-dark btn-block">CambiarContraseña</button>
+        </form>
+    </div>
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password === confirmPassword) {
+                // Las contraseñas coinciden, puedes enviar el formulario
+                document.forms[0].submit(); // Cambia "forms[0]" según el índice de tu formulario si hay varios en la página
+            } else {
+                // Las contraseñas no coinciden, muestra un mensaje de error o realiza alguna acción adicional
+                alert("Las contraseñas no coinciden");
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Function to check if passwords match
+            function checkPasswords() {
+                var password = $("#password").val();
+                var confirmPassword = $("#confirmPassword").val();
+
+                if (password !== confirmPassword) {
+                    alert("Las contraseñas no coinciden");
+                    return false; // Prevent form submission
+                }
+
+                return true; // Allow form submission
+            }
+
+            // Attach the function to the form submission
+            $("form").submit(function () {
+                return checkPasswords();
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+

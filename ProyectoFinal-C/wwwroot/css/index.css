@@ -1,0 +1,10 @@
+﻿body {
+    background-color: #fff; /* Fondo blanco */
+    color: #000; /* Texto negro */
+}
+
+.confirmation-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
