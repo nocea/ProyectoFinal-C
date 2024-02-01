@@ -52,5 +52,9 @@ namespace ProyectoFinal_C.Controllers
         {
             return View();
         }
+        public IActionResult CambiarContrasenaExitoso()
+        {
+            return View();
+        }
     }
 }
