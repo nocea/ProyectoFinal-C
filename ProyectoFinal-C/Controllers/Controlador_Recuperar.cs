@@ -15,12 +15,23 @@ namespace ProyectoFinal_C.Controllers
         {
             try
             {
+                var nuevoUsuario = new Usuario
+                {
+                    nombreCompleto_usuario = "",
+                    rol_usuario = "",
+                    movil_usuario = 0,
+                    alias_usuario = "",
+                    passwd_usuario = "",
+                    email_usuario = usuarioRecuperar.email_usuario,
+                    token_usuario="",
+                    
+                };
                 using (HttpClient httpClient = new HttpClient())
                 {
                     string apiUrl = "https://localhost:7289/api/Controlador_Recuperar/RecuperarContrasena";
 
                     
-                    string jsonUsuario = JsonConvert.SerializeObject(usuarioRecuperar);
+                    string jsonUsuario = JsonConvert.SerializeObject(nuevoUsuario);
 
                     
                     StringContent content = new StringContent(jsonUsuario, Encoding.UTF8, "application/json");
@@ -57,13 +68,22 @@ namespace ProyectoFinal_C.Controllers
         public async Task<IActionResult> CambiarContrasena(Usuario usuarioContrasenaNueva,string email, string token)
         {
             try
-            {
-                await Console.Out.WriteLineAsync(email);
-                await Console.Out.WriteLineAsync(token);
+            {   //Guardo el usuario del form
+                var usuarioEmailPasswdToken = new Usuario
+                {
+                    nombreCompleto_usuario = "",
+                    rol_usuario = "",
+                    movil_usuario = 0,
+                    alias_usuario = "",
+                    passwd_usuario = usuarioContrasenaNueva.passwd_usuario,
+                    email_usuario = email,
+                    token_usuario = token,
+
+                };
                 using (HttpClient httpClient = new HttpClient())
                 {
                     string apiUrl = "https://localhost:7289/api/Controlador_Recuperar/CambiarContrasena";
-                    string jsonUsuario = JsonConvert.SerializeObject(usuarioContrasenaNueva);
+                    string jsonUsuario = JsonConvert.SerializeObject(usuarioEmailPasswdToken);
                     StringContent content = new StringContent(jsonUsuario, Encoding.UTF8, "application/json");
                     HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
                     if (response.IsSuccessStatusCode)

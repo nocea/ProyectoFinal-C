@@ -14,15 +14,16 @@ namespace ProyectoFinal_C.Controllers
         public async Task<IActionResult> InicioSesion(Usuario usuarioLogin)
         {
             try
-            {   //Guardo el usuario para el login
+            {   //Guardo el usuario del form
                 var nuevoUsuario = new Usuario
                 {
-                    nombreCompleto_usuario = usuarioLogin.nombreCompleto_usuario,
-                    rol_usuario = "rol_usuario",
-                    movil_usuario = usuarioLogin.movil_usuario,
-                    alias_usuario = usuarioLogin.alias_usuario,
+                    nombreCompleto_usuario = "",
+                    rol_usuario = "",
+                    movil_usuario = 0,
+                    alias_usuario = "",
                     passwd_usuario = usuarioLogin.passwd_usuario,
                     email_usuario = usuarioLogin.email_usuario,
+                    token_usuario=""
 
                 };
                
