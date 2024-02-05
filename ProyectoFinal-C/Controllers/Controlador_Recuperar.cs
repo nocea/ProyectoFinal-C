@@ -10,6 +10,22 @@ namespace ProyectoFinal_C.Controllers
 {
     public class Controlador_Recuperar : Controller
     {
+        public IActionResult EnviadoRecuperar()
+        {
+            return View();
+        }
+        public IActionResult RecuperarContraseña()
+        {
+            return View();
+        }
+        public IActionResult CambiarContrasena()
+        {
+            return View();
+        }
+        public IActionResult CambiarContrasenaExitoso()
+        {
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> RecuperarContrasena(Usuario usuarioRecuperar)
         {
@@ -41,7 +57,7 @@ namespace ProyectoFinal_C.Controllers
                     if (response.IsSuccessStatusCode)
                     {
                         
-                        return RedirectToAction("EnviadoRecuperar", "Home");
+                        return RedirectToAction("EnviadoRecuperar", "Controlador_Recuperar");
                     }
                     else if (response.StatusCode == HttpStatusCode.Conflict)
                     {
@@ -50,7 +66,7 @@ namespace ProyectoFinal_C.Controllers
                         
                         ModelState.AddModelError(string.Empty, errorMessage);
                         
-                        return View("~/Views/Home/RecuperarContraseña.cshtml", usuarioRecuperar);
+                        return View("~/Views/Controlador_Recuperar/RecuperarContraseña.cshtml", usuarioRecuperar);
                     }
                     else
                     {
@@ -88,7 +104,7 @@ namespace ProyectoFinal_C.Controllers
                     HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
                     if (response.IsSuccessStatusCode)
                     {
-                        return RedirectToAction("CambiarContrasenaExitoso", "Home");
+                        return RedirectToAction("CambiarContrasenaExitoso", "Controlador_Recuperar");
                     }
                     else if (response.StatusCode == HttpStatusCode.Conflict)
                     {

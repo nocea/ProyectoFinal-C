@@ -452,3 +452,4 @@ D:\PROYECTOS FINALES GRADO\.NET\ProyectoFinal-C\ProyectoFinal-C\obj\Debug\net6.0
 D:\PROYECTOS FINALES GRADO\.NET\ProyectoFinal-C\ProyectoFinal-C\obj\Debug\net6.0\ProyectoFinal-C.pdb
 D:\PROYECTOS FINALES GRADO\.NET\ProyectoFinal-C\ProyectoFinal-C\obj\Debug\net6.0\ProyectoFinal-C.genruntimeconfig.cache
 D:\PROYECTOS FINALES GRADO\.NET\ProyectoFinal-C\ProyectoFinal-C\obj\Debug\net6.0\ref\ProyectoFinal-C.dll
+D:\PROYECTOS FINALES GRADO\.NET\ProyectoFinal-C\ProyectoFinal-C\obj\Debug\net6.0\ProyectoFinal-C.sourcelink.json

@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProyectoFinal_C.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace ProyectoFinal_C.Controllers
 {   //Aqui redirijo a las vistas
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -12,49 +15,22 @@ namespace ProyectoFinal_C.Controllers
         {
             _logger = logger;
         }
-        public IActionResult Registro()
-        {
-            return View();
-        }
-        public IActionResult Index()
-        {
-            return View();
-        }
-        public IActionResult Login()
-        {
-            return View();
-        }
-        public IActionResult EnviadoRecuperar()
-        {
-            return View();
-        }
-        public IActionResult RegistroExitoso()
-        {
-            return View();
-        }
         public IActionResult InicioSesionExitoso()
         {
-            return View();
-        }
-        public IActionResult RecuperarContraseña()
-        {
-            return View();
-        }
-        public IActionResult RecuperarExitoso()
-        {
+            ClaimsPrincipal claimUser = HttpContext.User;
+            string nombreUsuario = "";
+            if (claimUser.Identity.IsAuthenticated)
+            {
+                nombreUsuario = claimUser.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
+            }
+            ViewData["nombreUsuario"] = nombreUsuario;
             return View();
         }
         public IActionResult ErrorPersonalizado()
         {
             return View();
         }
-        public IActionResult CambiarContrasena()
-        {
-            return View();
-        }
-        public IActionResult CambiarContrasenaExitoso()
-        {
-            return View();
-        }
+        
+        
     }
 }

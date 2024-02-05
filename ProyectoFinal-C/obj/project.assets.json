@@ -9593,19 +9593,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Puesto10\\.nuget\\packages\\": {}
+    "C:\\Users\\mnoce\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Puesto10\\Desktop\\GITHUB\\VisualStudio(.NET)\\ProyectoFinal-C\\ProyectoFinal-C\\ProyectoFinal-C.csproj",
+      "projectUniqueName": "D:\\PROYECTOS FINALES GRADO\\.NET\\ProyectoFinal-C\\ProyectoFinal-C\\ProyectoFinal-C.csproj",
       "projectName": "ProyectoFinal-C",
-      "projectPath": "C:\\Users\\Puesto10\\Desktop\\GITHUB\\VisualStudio(.NET)\\ProyectoFinal-C\\ProyectoFinal-C\\ProyectoFinal-C.csproj",
-      "packagesPath": "C:\\Users\\Puesto10\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Puesto10\\Desktop\\GITHUB\\VisualStudio(.NET)\\ProyectoFinal-C\\ProyectoFinal-C\\obj\\",
+      "projectPath": "D:\\PROYECTOS FINALES GRADO\\.NET\\ProyectoFinal-C\\ProyectoFinal-C\\ProyectoFinal-C.csproj",
+      "packagesPath": "C:\\Users\\mnoce\\.nuget\\packages\\",
+      "outputPath": "D:\\PROYECTOS FINALES GRADO\\.NET\\ProyectoFinal-C\\ProyectoFinal-C\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Puesto10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mnoce\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9663,7 +9663,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

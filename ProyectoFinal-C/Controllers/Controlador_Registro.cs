@@ -4,12 +4,21 @@ using ProyectoFinal_C.Models;
 using System.Net;
 using System.Text;
 using BCrypt.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProyectoFinal_C.Controllers
 {
+    
     public class Controlador_Registro : Controller
     {
-        
+        public IActionResult Registro()
+        {
+            return View();
+        }
+        public IActionResult RegistroExitoso()
+        {
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> RegistrarUsuario(Usuario usuario)
         {
@@ -44,7 +53,7 @@ namespace ProyectoFinal_C.Controllers
                     if (response.IsSuccessStatusCode)// si se ha registrado correctamente me manda a la vista de registro exitoso
                     {
                         // Registro exitoso
-                        return RedirectToAction("RegistroExitoso","Home"); 
+                        return RedirectToAction("RegistroExitoso","Controlador_registro"); 
                     }
                     else if (response.StatusCode == HttpStatusCode.Conflict)//si hay algun mensaje de conflicto email/alias
                     {   
@@ -53,7 +62,7 @@ namespace ProyectoFinal_C.Controllers
                         //lo añado al modelState para poder mostrarlo por la vista
                         ModelState.AddModelError(string.Empty, errorMessage);
                         //muestro la vista con el error
-                        return View("~/Views/Home/Registro.cshtml", usuario);
+                        return View("~/Views/Controlador_Registro/Registro.cshtml", usuario);
                     }
                     else
                     {

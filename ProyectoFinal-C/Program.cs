@@ -1,7 +1,28 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+    options =>
+    {
+        options.LoginPath = "/Home/Login";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    }
+    );
+//Para que si he cerrado sesiión y le doy a volver a la página anterior no me pueda acceder y que se borre la caché
+builder.Services.AddControllersWithViews(
+    options =>
+    {
+        options.Filters.Add(
+            new ResponseCacheAttribute
+            {
+                NoStore = true,
+                Location=ResponseCacheLocation.None,
+            }
+            );
+    });
 
 var app = builder.Build();
 
@@ -17,11 +38,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Controlador_Login}/{action=Login}/{id?}");
 
 app.Run();

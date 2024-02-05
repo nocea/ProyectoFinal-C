@@ -4,12 +4,19 @@ using ProyectoFinal_C.Models;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+//Autentificacion por cookies
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace ProyectoFinal_C.Controllers
 {
     public class Controlador_Login : Controller
     {
-        
+        public IActionResult Login()
+        {
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> InicioSesion(Usuario usuarioLogin)
         {
@@ -37,12 +44,30 @@ namespace ProyectoFinal_C.Controllers
                     StringContent content = new StringContent(jsonUsuario, Encoding.UTF8, "application/json");
                     //le envio la solicitud y espero a la respuesta
                     HttpResponseMessage response = await client.PostAsync(apiBaseUrl, content);
-                    
-                    
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    UsuarioResponse usuarioResponse = JsonConvert.DeserializeObject<UsuarioResponse>(responseBody);
+
 
                     // si ha encontrado todo devuelve una respuesta exitosa
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode&&usuarioResponse.Usuario != null)
                     {
+                        Usuario usuarioEncontrado = usuarioResponse.Usuario;
+                        Console.WriteLine(responseBody);
+                        List<Claim> claims = new List<Claim>()
+                        {
+                            new Claim(ClaimTypes.Name,usuarioEncontrado.nombreCompleto_usuario)
+                        };
+                        Console.WriteLine(usuarioEncontrado.nombreCompleto_usuario);
+                        ClaimsIdentity identity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
+                        AuthenticationProperties authenticationProperties = new AuthenticationProperties()
+                        {
+                            AllowRefresh = true
+                        };
+                        await HttpContext.SignInAsync(
+                            CookieAuthenticationDefaults.AuthenticationScheme,
+                            new ClaimsPrincipal(identity),
+                            authenticationProperties
+                            );
                         // muestro al vista de inicio sesion exitoso
                         return RedirectToAction("InicioSesionExitoso", "Home");
                     }
@@ -53,7 +78,7 @@ namespace ProyectoFinal_C.Controllers
                         //lo añado al modelState para poder mostrarlo por la vista
                         ModelState.AddModelError(string.Empty, errorMessage);
                         //muestro la vista con el error
-                        return View("~/Views/Home/Login.cshtml", usuarioLogin);
+                        return View("~/Views/Controlador_Login/Login.cshtml", usuarioLogin);
                     }
                     else
                     {                       
@@ -66,6 +91,11 @@ namespace ProyectoFinal_C.Controllers
                 //Para cualquier error me manda a la vista de error personalizado
                 return RedirectToAction("ErrorPersonalizado", "Home");
             }
+        }
+        public async Task<IActionResult> CerrarSesion()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Controlador_Login");
         }
     }
 }

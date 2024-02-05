@@ -1,4 +1,6 @@
-﻿
+﻿@{
+    Layout = "~/Views/Shared/layout2.cshtml";
+}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,7 +14,7 @@
 
     <div class="container confirmation-container">
         <div class="jumbotron">
-            <h1 class="display-4">Incio de Sesión Exitoso!</h1>
+            <h1 class="display-4">Incio de Sesión Exitoso!@ViewData["nombreUsuario"]</h1>
             <p class="lead">Gracias por iniciar Sesión</p>
             <hr class="my-4">
             <p class="lead">
