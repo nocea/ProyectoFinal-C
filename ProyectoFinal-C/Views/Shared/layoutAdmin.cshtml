@@ -1,4 +1,9 @@
 ﻿
+@{
+    ViewData["Title"] = "layoutAdmin";
+}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,15 +18,18 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top">
             <div id="top" class="container">
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-rocket-takeoff"></i><i class="bi bi-caret-left"></i></a>
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="IndexAdmin"><i class="bi bi-rocket-takeoff"></i><i class="bi bi-caret-left"></i></a>
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
                             <a class="nav-link" asp-area="" asp-controller="Controlador_Login" asp-action="CerrarSesion">Cerrar Sesión</a>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="GestionUsuarios">Gestión Usuarios</a>
+                        </li>
                     </ul>
                 </div>
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-caret-right"></i><i class="bi bi-rocket-takeoff"></i></a>
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="IndexAdmin"><i class="bi bi-caret-right"></i><i class="bi bi-rocket-takeoff"></i></a>
             </div>
         </nav>
     </header>
@@ -46,4 +54,6 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
 

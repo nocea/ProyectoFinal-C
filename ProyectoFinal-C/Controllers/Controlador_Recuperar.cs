@@ -51,7 +51,6 @@ namespace ProyectoFinal_C.Controllers
 
                     
                     StringContent content = new StringContent(jsonUsuario, Encoding.UTF8, "application/json");
-
                     
                     HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
                     if (response.IsSuccessStatusCode)

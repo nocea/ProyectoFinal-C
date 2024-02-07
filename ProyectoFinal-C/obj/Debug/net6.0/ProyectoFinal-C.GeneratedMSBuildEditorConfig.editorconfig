@@ -44,16 +44,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGFkb3JfUmVnaXN0cm9cUmVnaXN0cm9FeGl0b3NvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/EditarUsuario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFZGl0YXJVc3VhcmlvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/ErrorPersonalizado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFcnJvclBlcnNvbmFsaXphZG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/InicioSesionExitoso.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmljaW9TZXNpb25FeGl0b3NvLmNzaHRtbA==
+[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/GestionUsuarios.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxHZXN0aW9uVXN1YXJpb3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/IndexAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleEFkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Shared/layout2.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXGxheW91dDIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Shared/layoutAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXGxheW91dEFkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Shared/_ValidationScriptsPartial.cshtml]

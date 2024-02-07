@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "~/Views/Shared/layoutAdmin.cshtml";
+}
+@model List<Usuario>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Usuarios</h1>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtEmailBusqueda" placeholder="Buscar por Email">
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo Electrónico</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usuario in Model)
+                {
+                    @if (usuario.rol_usuario != "ADMIN")
+                    {
+                        <tr>
+                            <td>@usuario.id_usuario</td>
+                            <td>@usuario.nombreCompleto_usuario</td>
+                            <td>@usuario.email_usuario</td>
+                            <td>
+                                <form method="get" action="/Home/EditarUsuario">
+                                    <input type="hidden" name="id" value="@usuario.id_usuario" />
+                                    <button type="submit" class="btn btn-dark">Editar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById("txtEmailBusqueda").addEventListener("input", function () {
+            var filtro = this.value.toLowerCase();
+            var filas = document.querySelectorAll("tbody tr");
+
+            filas.forEach(function (fila) {
+                var email = fila.querySelector("td:nth-child(3)").textContent.toLowerCase();
+                var id = fila.querySelector("td:nth-child(1)").textContent.toLowerCase();
+                var nombre = fila.querySelector("td:nth-child(2)").textContent.toLowerCase();
+
+                if (email.includes(filtro) || id.includes(filtro) || nombre.includes(filtro)) {
+                    fila.style.display = "table-row";
+                } else {
+                    fila.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -69,7 +69,10 @@ namespace ProyectoFinal_C.Controllers
                             authenticationProperties
                             );
                         // muestro al vista de inicio sesion exitoso
-                        return RedirectToAction("InicioSesionExitoso", "Home");
+                        if (usuarioEncontrado.rol_usuario == "ADMIN") {
+                            return RedirectToAction("IndexAdmin","Home");
+                        }
+                        return RedirectToAction("Index", "Home");
                     }
                     else if(response.StatusCode == HttpStatusCode.Conflict)
                     {
