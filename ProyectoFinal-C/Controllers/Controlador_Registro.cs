@@ -34,7 +34,7 @@ namespace ProyectoFinal_C.Controllers
                     passwd_usuario = usuario.passwd_usuario,
                     email_usuario = usuario.email_usuario,                    
                 };
-                Console.WriteLine(nuevoUsuario.movil_usuario);
+                
                 // Sirve para recibir y hacer peticiones http a la api
                 using (HttpClient httpClient = new HttpClient())
                 {

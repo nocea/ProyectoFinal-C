@@ -1,7 +1,8 @@
 ﻿using Newtonsoft.Json;
 
 namespace ProyectoFinal_C.Models
-{
+{   //esto lo tuve que hacer asi porque si no al deserializar la respuesta de un objeto usuario de la api me daba error ya que me devilvia el usuario:atributos
+    //y no los atributos directamente.
     public class UsuarioResponse
     {
         [JsonProperty("usuario")]

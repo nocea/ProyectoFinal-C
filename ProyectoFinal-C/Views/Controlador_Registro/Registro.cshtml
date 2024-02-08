@@ -52,21 +52,6 @@
             </div>
             <button type="submit" class="btn btn-dark btn-block">Registrar</button>
         </form>
-        @*  @if (!ViewData.ModelState.IsValid)
-        {
-            <div>
-                <ul>
-                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                    {
-                        var errorMessage = JObject.Parse(error.ErrorMessage)["mensaje"]?.ToString();
-                        if (!string.IsNullOrEmpty(errorMessage))
-                        {
-                            <li >@errorMessage</li>
-                        }
-                    }
-                </ul>
-            </div>
-        }  *@
     </div>
      <script>
         document.addEventListener('DOMContentLoaded', function () {
