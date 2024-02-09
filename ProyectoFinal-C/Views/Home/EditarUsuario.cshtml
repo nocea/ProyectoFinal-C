@@ -1,8 +1,9 @@
 ﻿@{
-    Layout = "~/Views/Shared/layoutAdmin.cshtml";
+    @model Usuario 
+        Layout = "~/Views/Shared/layoutAdmin.cshtml";
     string id = ViewContext.HttpContext.Request.Query["id"];
 }
-@model Usuario
+
 
 <!DOCTYPE html>
 <html lang="es">

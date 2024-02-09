@@ -24,8 +24,6 @@ namespace ProyectoFinal_C.Models
         public string? email_usuario { get; set; }
         [JsonProperty("passwd_usuario")]
         public string? passwd_usuario { get; set; }
-        [JsonProperty("token_usuario")]
-        public string? token_usuario {  get; set; }
-        
+        public byte[]? imagen_usuario { get; set; }
     }
 }

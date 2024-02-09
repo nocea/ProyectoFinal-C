@@ -1,0 +1,79 @@
+﻿@{
+    Layout = "~/Views/Shared/layout2.cshtml";
+}
+@model Usuario
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>BlogShip</title>
+    <link rel="stylesheet" href="~/css/index.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+            .user-info img {
+                width: 100px; /* Tamaño de la imagen */
+                height: 100px;
+                border-radius: 50%; /* Para hacer que la imagen sea redonda */
+                margin-right: 2rem; /* Espacio entre la imagen y el texto */
+            }
+
+        .user-details {
+            margin-top: 2rem;
+        }
+
+            .user-details p {
+                margin-bottom: 1rem;
+            }
+
+            .user-details h2 {
+                margin-bottom: 1rem;
+            }
+
+        /* Estilos para el botón de edición */
+        .edit-button {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container confirmation-container">
+        <div class="jumbotron">
+            <!-- Mostrar la imagen y el alias del usuario -->
+            <div class="user-info">
+                @if (Model.imagen_usuario != null && Model.imagen_usuario.Length > 0)
+                {
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.imagen_usuario)" alt="Imagen de perfil" />
+                }
+                else
+                {
+                    <p>No se encontró ninguna imagen para mostrar.</p>
+                }
+                <h1 class="display-4">@@@Model.alias_usuario</h1>
+            </div>
+            <hr class="my-4">
+            <div class="user-details">
+                <h2>Detalles del Usuario</h2>
+                <p><strong>Nombre Completo:</strong> @Model.nombreCompleto_usuario</p>
+                <p><strong>Email:</strong> @Model.email_usuario</p>
+                <p><strong>Teléfono:</strong> @Model.movil_usuario</p>
+                <p><strong>Contraseña:</strong> *********</p>
+                    <input type="hidden" name="id" value="@Model.id_usuario" />
+                    <button type="submit" class="btn btn-dark">Editar</button> 
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

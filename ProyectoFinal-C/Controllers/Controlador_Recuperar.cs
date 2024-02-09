@@ -38,9 +38,7 @@ namespace ProyectoFinal_C.Controllers
                     movil_usuario = 0,
                     alias_usuario = "",
                     passwd_usuario = "",
-                    email_usuario = usuarioRecuperar.email_usuario,
-                    token_usuario="",
-                    
+                    email_usuario = usuarioRecuperar.email_usuario,                 
                 };
                 using (HttpClient httpClient = new HttpClient())
                 {
@@ -92,12 +90,10 @@ namespace ProyectoFinal_C.Controllers
                     alias_usuario = "",
                     passwd_usuario = usuarioContrasenaNueva.passwd_usuario,
                     email_usuario = email,
-                    token_usuario = token,
-
                 };
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    string apiUrl = "https://localhost:7289/api/Controlador_Recuperar/CambiarContrasena";
+                    string apiUrl = "https://localhost:7289/api/Controlador_Recuperar/CambiarContrasena/"+token;
                     string jsonUsuario = JsonConvert.SerializeObject(usuarioEmailPasswdToken);
                     StringContent content = new StringContent(jsonUsuario, Encoding.UTF8, "application/json");
                     HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
