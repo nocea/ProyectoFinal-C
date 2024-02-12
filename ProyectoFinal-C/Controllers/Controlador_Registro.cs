@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Authorization;
+using NuGet.Common;
 
 namespace ProyectoFinal_C.Controllers
 {
@@ -18,6 +19,34 @@ namespace ProyectoFinal_C.Controllers
         public IActionResult RegistroExitoso()
         {
             return View();
+        }
+        public async Task<IActionResult> ConfirmacionRegistro(string email)
+        {
+            try
+            {   
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    string apiUrl = "https://localhost:7289/api/Controlador_Registro/ConfirmacionRegistro/" + email;
+                    HttpResponseMessage response = await httpClient.PostAsync(apiUrl, null);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return View();
+                    }
+                    else if (response.StatusCode == HttpStatusCode.Conflict)
+                    {
+
+                        return View("ErrorPersonalizado", "Home");
+                    }
+                    else
+                    {
+                        return View("ErrorPersonalizado", "Home");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("ErrorPersonalizado", "Home");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> RegistrarUsuario(Usuario usuario)
