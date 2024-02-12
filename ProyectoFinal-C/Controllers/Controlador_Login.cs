@@ -30,6 +30,7 @@ namespace ProyectoFinal_C.Controllers
                     alias_usuario = "",
                     passwd_usuario = usuarioLogin.passwd_usuario,
                     email_usuario = usuarioLogin.email_usuario,
+                    
                 };
                
                 using (HttpClient client = new HttpClient())
