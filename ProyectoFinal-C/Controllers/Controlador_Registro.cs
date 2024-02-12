@@ -51,8 +51,10 @@ namespace ProyectoFinal_C.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarUsuario(Usuario usuario)
         {
+            string errorMessage=null;
             try
             {
+                
                 // Creo un usuario de la misma forma que lo tiene la API
                 var nuevoUsuario = new Usuario
                 {
@@ -68,7 +70,7 @@ namespace ProyectoFinal_C.Controllers
                 using (HttpClient httpClient = new HttpClient())
                 {
                     string apiUrl = "https://localhost:7289/api/Controlador_Registro";
-
+                    
                     // para convertir el usuario a json y poder pasarselo a la API
                     string jsonUsuario = JsonConvert.SerializeObject(nuevoUsuario);
 
@@ -77,33 +79,34 @@ namespace ProyectoFinal_C.Controllers
 
                     // peticion con la url y el contenido que se le manda al post y guarda el mensaje de respuesta
                     HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
-
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    var errorObject = JsonConvert.DeserializeObject<dynamic>(responseBody);
+                    if (errorObject != null)
+                    {
+                        errorMessage = errorObject.mensaje;
+                    }
                     // con el mensaje de respuesta muestra la vista
                     if (response.IsSuccessStatusCode)// si se ha registrado correctamente me manda a la vista de registro exitoso
                     {
                         // Registro exitoso
-                        return RedirectToAction("RegistroExitoso","Controlador_registro"); 
+                        return RedirectToAction("RegistroExitoso","Controlador_Registro"); 
                     }
                     else if (response.StatusCode == HttpStatusCode.Conflict)//si hay algun mensaje de conflicto email/alias
                     {   
-                        //guardo el mensaje de error que me ha mandado
-                        string errorMessage = await response.Content.ReadAsStringAsync();
-                        //lo añado al modelState para poder mostrarlo por la vista
-                        ModelState.AddModelError(string.Empty, errorMessage);
                         //muestro la vista con el error
-                        return View("~/Views/Controlador_Registro/Registro.cshtml", usuario);
+                        return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
                     }
                     else
                     {
                         // para otro error no controlado
                         
-                        return View("ErrorPersonalizado", "Home");
+                        return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
                     }
                 }
             }
             catch (Exception ex)
             {
-                return RedirectToAction("ErrorPersonalizado", "Home");
+                return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
             }
         }
     }

@@ -9,105 +9,107 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ProyectoFinal_C
 build_property.RootNamespace = ProyectoFinal_C
-build_property.ProjectDir = C:\Users\Puesto10\Desktop\GITHUB\VisualStudio(.NET)\ProyectoFinal-C\ProyectoFinal-C\
+build_property.ProjectDir = D:\PROYECTOS FINALES GRADO\.NET\ProyectoFinal-C\ProyectoFinal-C\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Puesto10\Desktop\GITHUB\VisualStudio(.NET)\ProyectoFinal-C\ProyectoFinal-C
+build_property.MSBuildProjectDirectory = D:\PROYECTOS FINALES GRADO\.NET\ProyectoFinal-C\ProyectoFinal-C
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Login/Login.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Login/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGFkb3JfTG9naW5cTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Recuperar/CambiarContrasena.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Recuperar/CambiarContrasena.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGFkb3JfUmVjdXBlcmFyXENhbWJpYXJDb250cmFzZW5hLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Recuperar/CambiarContrasenaExitoso.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Recuperar/CambiarContrasenaExitoso.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGFkb3JfUmVjdXBlcmFyXENhbWJpYXJDb250cmFzZW5hRXhpdG9zby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Recuperar/EnviadoRecuperar.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Recuperar/EnviadoRecuperar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGFkb3JfUmVjdXBlcmFyXEVudmlhZG9SZWN1cGVyYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Recuperar/RecuperarContraseña.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Recuperar/RecuperarContraseña.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGFkb3JfUmVjdXBlcmFyXFJlY3VwZXJhckNvbnRyYXNlw7FhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Registro/ConfirmacionRegistro.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Registro/ConfirmacionRegistro.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGFkb3JfUmVnaXN0cm9cQ29uZmlybWFjaW9uUmVnaXN0cm8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Registro/Registro.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Registro/Registro.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGFkb3JfUmVnaXN0cm9cUmVnaXN0cm8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Registro/RegistroExitoso.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Registro/RegistroExitoso.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGFkb3JfUmVnaXN0cm9cUmVnaXN0cm9FeGl0b3NvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Usuario/EditarUsuario.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Controlador_Usuario/EditarUsuario.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGFkb3JfVXN1YXJpb1xFZGl0YXJVc3VhcmlvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/EditarExitoso.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/EditarExitoso.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFZGl0YXJFeGl0b3NvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/EditarUsuario.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/EditarUsuario.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFZGl0YXJVc3VhcmlvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/ErrorPersonalizado.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/ErrorPersonalizado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFcnJvclBlcnNvbmFsaXphZG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/GestionUsuarios.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/GestionUsuarios.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxHZXN0aW9uVXN1YXJpb3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/Index.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/IndexAdmin.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/IndexAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleEFkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/MiCuenta.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/MiCuenta.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNaUN1ZW50YS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/RegistroAdmin.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/RegistroAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Ryb0FkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Home/RegistroExitosoAdmin.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/RegistroExitosoAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Ryb0V4aXRvc29BZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Shared/layout2.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Shared/layout2.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXGxheW91dDIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Shared/layoutAdmin.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Shared/layoutAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXGxheW91dEFkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/_ViewImports.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/_ViewStart.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Puesto10/Desktop/GITHUB/VisualStudio(.NET)/ProyectoFinal-C/ProyectoFinal-C/Views/Shared/_Layout.cshtml]
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-yzewc8o44a

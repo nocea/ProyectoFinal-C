@@ -30,6 +30,7 @@ namespace ProyectoFinal_C.Controllers
         }
         public async Task<IActionResult> MiCuenta()
         {
+
             ClaimsPrincipal claimUser = HttpContext.User;
             string nombreUsuario = "";
             Usuario usuario = null;
@@ -181,6 +182,7 @@ namespace ProyectoFinal_C.Controllers
         public async Task<IActionResult> EditarUsuario()
         {
             int id;
+            string errorMessage;
             //Pilla el id de la url lo intenta convertir a string y lo guarda en "id"
             if (int.TryParse(Request.Query["id"], out id))
             {
@@ -191,38 +193,32 @@ namespace ProyectoFinal_C.Controllers
                     try
                     {
                         HttpResponseMessage response = await client.GetAsync(apiUrl);
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        var errorObject = JsonConvert.DeserializeObject<dynamic>(responseBody);
+                        errorMessage = errorObject.mensaje;
                         if (response.IsSuccessStatusCode)
-                        {
-                            string responseBody = await response.Content.ReadAsStringAsync();
-
-                            // Deserializar la respuesta JSON en un objeto de tipo Usuario
-                            Usuario usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
-
-                            // Pasar el usuario a la vista de edición
+                        {                         
+                            Usuario usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);                            
                             return View(usuario);
                         }
                         else
                         {
-                            // Manejar el caso en el que la solicitud a la API no sea exitosa
-                            // Aquí puedes devolver una vista de error o manejar el error de otra manera
-                            return NotFound();
+                            
+                            return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
                         }
                     }
                     catch (Exception ex)
                     {
-                        // Manejar excepciones si ocurren durante la solicitud HTTP
-                        // Aquí puedes devolver una vista de error o manejar el error de otra manera
-                        return View("Error");
+                        errorMessage = "[ERROR-EditarUsuario()]Error al editar el usuario";
+                        return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
                     }
                 }
             }
             else
             {
-                // Manejar el caso en el que la ID no sea válida
-                // Aquí puedes devolver una vista de error o manejar el error de otra manera
-                return BadRequest();
+                errorMessage = "[ERROR-EditarUsuario()]Error al convertir el usuario";
+                return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
             }
-
         }
         public IActionResult EditarExitoso()
         {

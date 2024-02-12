@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "ErrorPersonalizado";
 }
-
+@model string
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-6 offset-md-3 text-center">
                 <h1 class="display-4">Error</h1>
-                <p class="lead">Lo sentimos, ha ocurrido un error.</p>
+                <p>@Model</p>
                 <a href="/" class="btn btn-dark">Volver al inicio</a>
             </div>
         </div>
