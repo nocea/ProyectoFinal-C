@@ -69,7 +69,7 @@ namespace ProyectoFinal_C.Controllers
                             );
                         // muestro al vista de inicio sesion exitoso
                         if (usuarioEncontrado.rol_usuario == "ADMIN") {
-                            return RedirectToAction("IndexAdmin","Home");
+                            return RedirectToAction("IndexAdmin","Controlador_Admin");
                         }
                         return RedirectToAction("Index", "Home");
                     }

@@ -1,6 +1,6 @@
 ﻿@{
-    @model Usuario
-    Layout = "~/Views/Shared/layout2.cshtml";
+    @model Usuario 
+        Layout = "~/Views/Shared/layoutAdmin.cshtml";
     string id = ViewContext.HttpContext.Request.Query["id"];
 }
 
@@ -17,7 +17,7 @@
 </head>
 <body>
     <div class="form-container">
-        <form asp-controller="Controlador_Usuario" asp-action="GuardarCambios" method="post">
+        <form asp-controller="Controlador_Admin" asp-action="GuardarCambios" method="post">
             <h2 class="text-center mb-4">Editar Usuario</h2>
             <div class="form-group">
                 <label asp-for="nombreCompleto_usuario"><i class="bi bi-caret-right"></i>Nombre Completo</label>
@@ -51,5 +51,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
-
 
