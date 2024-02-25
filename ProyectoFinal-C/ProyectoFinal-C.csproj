@@ -8,13 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <Compile Remove="Views\Controlador_Usuario\**" />
+    <Content Remove="Views\Controlador_Usuario\**" />
+    <EmbeddedResource Remove="Views\Controlador_Usuario\**" />
+    <None Remove="Views\Controlador_Usuario\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Controlador_Usuario\" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

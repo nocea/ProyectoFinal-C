@@ -208,7 +208,7 @@ namespace ProyectoFinal_C.Controllers
                         id_usuario = usuarioBBDD.id_usuario,
                         passwd_usuario = usuarioBBDD.passwd_usuario,
                         rol_usuario = usuarioBBDD.rol_usuario
-                    };
+                    };  
                     using (HttpClient httpClient = new HttpClient())
                     {
                         string apiUrl2 = "https://localhost:7289/api/Controlador_Gestion/EditarUsuario";

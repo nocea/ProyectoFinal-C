@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "~/Views/Shared/layout2.cshtml";
+}
+@model List<Post>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BlogShip</title>
+    <!-- Agrega los enlaces a Bootstrap CSS y cualquier otro archivo de estilo necesario -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Agrega cualquier otro archivo de estilo personalizado -->
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center flex-column align-items-center">
+            @foreach (var post in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="data:image;base64,@Convert.ToBase64String(post.imagen_post)" class="card-img-top" alt="Imagen de post">
+                        <div class="card-body">
+                            <h5 class="card-title">@post.titulo_post</h5>
+                            <p class="card-text">@post.pie_post</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="@Url.Action("ComentarPost", "Controlador_Usuario", new { id = post.id_post })" class="btn btn-sm btn-outline-secondary bg-dark">
+                                        <i class="bi bi-chat"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <!-- Agrega un contenedor para el botón fijo -->
+    <div class="fixed-bottom mb-4 ml-4">
+        <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="CrearPost">Crear Post</a>
+    </div>
+    <!-- Scripts de Bootstrap y cualquier otro archivo JavaScript necesario -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Agrega cualquier otro archivo de script personalizado -->
+</body>
+</html>

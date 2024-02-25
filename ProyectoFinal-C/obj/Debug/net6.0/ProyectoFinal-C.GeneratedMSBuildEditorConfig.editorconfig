@@ -74,6 +74,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJvbGFkb3JfUmVnaXN0cm9cUmVnaXN0cm9FeGl0b3NvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/CrearPost.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDcmVhclBvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/ErrorPersonalizado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFcnJvclBlcnNvbmFsaXphZG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -84,6 +88,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/MiCuenta.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNaUN1ZW50YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Home/ParaTi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQYXJhVGkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/PROYECTOS FINALES GRADO/.NET/ProyectoFinal-C/ProyectoFinal-C/Views/Shared/layout2.cshtml]

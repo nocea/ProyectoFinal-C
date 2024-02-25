@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/layout2.cshtml";
+}
+@model Usuario
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Crear Post</h2>
+            <form asp-controller="Home" asp-action="NuevoPost" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="titulo_post">Título del Post:</label>
+                    <input type="text" class="form-control" id="titulo_post" name="titulo_post" required>
+                </div>
+                <div class="form-group">
+                    <label for="ImagenFile">Subir Imagen:</label>
+                    <input type="file" class="form-control-file" id="ImagenFile" name="ImagenFile" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="pie_post">Pie de Foto:</label>
+                    <textarea class="form-control" id="pie_post" name="pie_post" rows="3"></textarea>
+                </div>
+                <input type="hidden" id="UsuarioId" name="UsuarioId" value=@Model.id_usuario />
+                <!-- Aquí se debe cambiar el valor "1" por el ID del usuario que está creando el post -->
+                <button type="submit" class="btn btn-primary btn-block">Crear Post</button>
+            </form>
+        </div>
+    </div>
+</div>
