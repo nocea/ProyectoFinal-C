@@ -26,8 +26,12 @@ namespace ProyectoFinal_C.Models
         public string? passwd_usuario { get; set; }
         [JsonProperty("imagen_usuario")]
         public byte[]? imagen_usuario { get; set; }
+        [JsonProperty("registrado")]
+        public bool? registrado { get; set; }
         [JsonProperty("Posts")]
         public ICollection<Post>? Posts { get; set; }
-
+        [JsonProperty("Comentarios")]
+        public ICollection<Comentario>? Comentarios { get; set; }
+        
     }
 }

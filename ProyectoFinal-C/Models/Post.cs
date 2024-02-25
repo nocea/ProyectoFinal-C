@@ -24,6 +24,8 @@ namespace ProyectoFinal_C.Models
         [JsonProperty("Usuario")]
         // Propiedad de navegación al usuario que publicó el post
         public Usuario? Usuario { get; set; }
+        [JsonProperty("Comentarios")]
+        public ICollection<Comentario>? Comentarios { get; set; }
 
     }
 }

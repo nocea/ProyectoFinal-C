@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Views/Shared/layout2.cshtml";
+    string idPost = ViewContext.HttpContext.Request.Query["idPost"];
+    @model Comentario
+}
+
+
+<form asp-controller="Home" asp-action="CrearComentario" method="post">
+    <input type="hidden" asp-for="PostId" value="@idPost" />
+    <div class="mb-3">
+        <label for="contenido_comentario" class="form-label">Nuevo Comentario</label>
+        <textarea class="form-control" id="contenido_comentario" name="contenido_comentario" rows="5" asp-for="contenido_comentario"></textarea>
+        <span asp-validation-for="contenido_comentario" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-dark">Enviar Comentario</button>
+</form>
+@if (ViewBag.ListaComentarios != null && ViewBag.ListaComentarios.Count > 0)
+{
+    <h2>Comentarios:</h2>
+    <ul>
+        @foreach (var comentario in ViewBag.ListaComentarios)
+        {
+            <li>@comentario.</li> <!-- Suponiendo que "Contenido" es una propiedad en tu clase Comentario -->
+        }
+    </ul>
+}
+else
+{
+    <p>No hay comentarios disponibles.</p>
+}
+
