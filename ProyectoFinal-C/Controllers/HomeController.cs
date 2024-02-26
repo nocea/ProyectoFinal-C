@@ -23,43 +23,57 @@ namespace ProyectoFinal_C.Controllers
         {
             _logger = logger;
         }
-
+        /// <summary>
+        /// Método para mostrar los datos de usuario
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> MiCuenta()
         {
-
-            ClaimsPrincipal claimUser = HttpContext.User;
-            string nombreUsuario = "";
-            Usuario usuario = null;
-            if (claimUser.Identity.IsAuthenticated)
+            try
             {
-                nombreUsuario = claimUser.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
+                ClaimsPrincipal claimUser = HttpContext.User;
+                string nombreUsuario = "";
+                Usuario usuario = null;
+                if (claimUser.Identity.IsAuthenticated)
+                {
+                    nombreUsuario = claimUser.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
+                }
+                string apiUrl1 = "https://localhost:7289/api/Controlador_Gestion/ObtenerUsuarioNombre/" + nombreUsuario;
+                using (HttpClient client = new HttpClient())
+                {
+                    try
+                    {
+                        HttpResponseMessage response = await client.GetAsync(apiUrl1);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string responseBody = await response.Content.ReadAsStringAsync();
+
+                            // Deserializar la respuesta JSON en una lista de usuarios
+                            usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Error al obtener los usuarios. Código de estado: {response.StatusCode}");
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        return View();
+                    }
+                }
+                return View(usuario);
             }
-            string apiUrl1 = "https://localhost:7289/api/Controlador_Gestion/ObtenerUsuarioNombre/" + nombreUsuario;
-            using (HttpClient client = new HttpClient())
+            catch (Exception ex)
             {
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync(apiUrl1);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-
-                        // Deserializar la respuesta JSON en una lista de usuarios
-                        usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Error al obtener los usuarios. Código de estado: {response.StatusCode}");
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    return View();
-                }
+                return View("ErrorPersonalizado", "Home");
             }
-            return View(usuario);
         }
+        /// <summary>
+        /// Método para cambiar la imagen de usuario
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CambiarImagen(Usuario usuario)
         {
@@ -78,7 +92,7 @@ namespace ProyectoFinal_C.Controllers
                 var nuevoUsuario = new Usuario
                 {
                     id_usuario = usuario.id_usuario,
-                    imagen_usuario=usuario.imagen_usuario                    
+                    imagen_usuario = usuario.imagen_usuario
                 };
                 using (HttpClient httpClient = new HttpClient())
                 {
@@ -123,57 +137,41 @@ namespace ProyectoFinal_C.Controllers
             }
         }
 
-            public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
-            ClaimsPrincipal claimUser = HttpContext.User;
-            string nombreUsuario = "";
-            Usuario usuario = null;
-            if (claimUser.Identity.IsAuthenticated)
+            try
             {
-                nombreUsuario = claimUser.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
+                ClaimsPrincipal claimUser = HttpContext.User;
+                string nombreUsuario = "";
+                Usuario usuario = null;
+                if (claimUser.Identity.IsAuthenticated)
+                {
+                    nombreUsuario = claimUser.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
+                }
+                ViewData["nombreUsuario"] = nombreUsuario;
+                return View();
             }
-            ViewData["nombreUsuario"] = nombreUsuario;
-            return View();
+            catch (Exception ex)
+            {
+                return View("ErrorPersonalizado", "Home");
+            }
         }
 
         public IActionResult ErrorPersonalizado()
         {
             return View();
         }
+        /// <summary>
+        /// Método para mostrar todos los posts
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> ParaTiAsync()
         {
-            string apiUrl1 = "https://localhost:7289/api/Controlador_Usuario";
-            List<Post> posts = new List<Post>();
-            using (HttpClient client = new HttpClient())
+            try
             {
-                HttpResponseMessage response = await client.GetAsync(apiUrl1);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-
-                    // Deserializar la respuesta JSON en una lista de usuarios
-                    posts = JsonConvert.DeserializeObject<List<Post>>(responseBody);
-                }
-                else
-                {
-                    Console.WriteLine($"Error al obtener los usuarios. Código de estado: {response.StatusCode}");
-                }
-            }
-            return View(posts);
-        }
-        public async Task<IActionResult> CrearPostAsync()
-        {
-            ClaimsPrincipal claimUser = HttpContext.User;
-            string nombreUsuario = "";
-            Usuario usuario = null;
-            if (claimUser.Identity.IsAuthenticated)
-            {
-                nombreUsuario = claimUser.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
-            }
-            string apiUrl1 = "https://localhost:7289/api/Controlador_Gestion/ObtenerUsuarioNombre/" + nombreUsuario;
-            using (HttpClient client = new HttpClient())
-            {
-                try
+                string apiUrl1 = "https://localhost:7289/api/Controlador_Usuario";
+                List<Post> posts = new List<Post>();
+                using (HttpClient client = new HttpClient())
                 {
                     HttpResponseMessage response = await client.GetAsync(apiUrl1);
                     if (response.IsSuccessStatusCode)
@@ -181,21 +179,71 @@ namespace ProyectoFinal_C.Controllers
                         string responseBody = await response.Content.ReadAsStringAsync();
 
                         // Deserializar la respuesta JSON en una lista de usuarios
-                        usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
+                        posts = JsonConvert.DeserializeObject<List<Post>>(responseBody);
                     }
                     else
                     {
                         Console.WriteLine($"Error al obtener los usuarios. Código de estado: {response.StatusCode}");
                     }
-
                 }
-                catch (Exception ex)
-                {
-                    return View();
-                }
+                return View(posts);
             }
-            return View(usuario);
+            catch (Exception ex)
+            {
+                return View("ErrorPersonalizado", "Home");
+            }
         }
+        /// <summary>
+        /// Método para mostrar la vista de crear un post
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> CrearPostAsync()
+        {
+            try
+            {
+                ClaimsPrincipal claimUser = HttpContext.User;
+                string nombreUsuario = "";
+                Usuario usuario = null;
+                if (claimUser.Identity.IsAuthenticated)
+                {
+                    nombreUsuario = claimUser.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
+                }
+                string apiUrl1 = "https://localhost:7289/api/Controlador_Gestion/ObtenerUsuarioNombre/" + nombreUsuario;
+                using (HttpClient client = new HttpClient())
+                {
+                    try
+                    {
+                        HttpResponseMessage response = await client.GetAsync(apiUrl1);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string responseBody = await response.Content.ReadAsStringAsync();
+
+                            // Deserializar la respuesta JSON en una lista de usuarios
+                            usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Error al obtener los usuarios. Código de estado: {response.StatusCode}");
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        return View();
+                    }
+                }
+                return View(usuario);
+            }
+            catch (Exception ex)
+            {
+                return View("ErrorPersonalizado", "Home");
+            }
+        }
+        /// <summary>
+        /// Método para crear un nuevo post
+        /// </summary>
+        /// <param name="post"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> NuevoPost(Post post)
         {
@@ -203,7 +251,7 @@ namespace ProyectoFinal_C.Controllers
             string errorMessage = null;
             try
             {
-                if (post.ImagenFile != null && post.ImagenFile.Length > 0)
+                if (post.ImagenFile != null && post.ImagenFile.Length > 0)//convierto la imagen a byte[]
                 {
                     // Leer la imagen en un array de bytes
                     using (var memoryStream = new MemoryStream())
@@ -212,7 +260,7 @@ namespace ProyectoFinal_C.Controllers
                         post.imagen_post = memoryStream.ToArray();
                     }
                 }
-                var nuevoPost = new Post
+                var nuevoPost = new Post//creo el nuevo post
                 {
                     titulo_post = post.titulo_post,
                     imagen_post = post.imagen_post,
@@ -261,101 +309,124 @@ namespace ProyectoFinal_C.Controllers
                 return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
             }
         }
+        /// <summary>
+        /// Método para mostrar la vista de comentar un post
+        /// </summary>
+        /// <param name="idPost"></param>
+        /// <returns></returns>
         public async Task<IActionResult> ComentarPostAsync(string idPost)
         {
-            
-            string apiUrl1 = "https://localhost:7289/api/Controlador_Usuario/AllComentarios/"+ idPost;
-            List<Comentario> comentarios = new List<Comentario>();
-            using (HttpClient client = new HttpClient())
+            try
             {
-                HttpResponseMessage response = await client.GetAsync(apiUrl1);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-
-                    // Deserializar la respuesta JSON en una lista de usuarios
-                    comentarios = JsonConvert.DeserializeObject<List<Comentario>>(responseBody);
-                    ViewBag.ListaComentarios = comentarios;
-                }
-                else
-                {
-                    Console.WriteLine($"Error al obtener los usuarios. Código de estado: {response.StatusCode}");
-                }
-            }
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> CrearComentario(Comentario comentario)
-        {
-            var errorMessage="";
-            ClaimsPrincipal claimUser = HttpContext.User;
-            string nombreUsuario = "";
-            Usuario usuario = null;
-            if (claimUser.Identity.IsAuthenticated)
-            {
-                nombreUsuario = claimUser.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
-            }
-            string apiUrl1 = "https://localhost:7289/api/Controlador_Gestion/ObtenerUsuarioNombre/" + nombreUsuario;
-            using (HttpClient client = new HttpClient())
-            {
-                try
+                string apiUrl1 = "https://localhost:7289/api/Controlador_Usuario/AllComentarios/" + idPost;
+                List<Comentario> comentarios = new List<Comentario>();
+                using (HttpClient client = new HttpClient())
                 {
                     HttpResponseMessage response = await client.GetAsync(apiUrl1);
-
                     if (response.IsSuccessStatusCode)
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
 
                         // Deserializar la respuesta JSON en una lista de usuarios
-                        usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
+                        comentarios = JsonConvert.DeserializeObject<List<Comentario>>(responseBody);
+                        ViewBag.ListaComentarios = comentarios;
                     }
                     else
                     {
                         Console.WriteLine($"Error al obtener los usuarios. Código de estado: {response.StatusCode}");
                     }
-                    using (HttpClient httpClient = new HttpClient())
+                }
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("ErrorPersonalizado", "Home");
+            }
+        }
+        /// <summary>
+        /// Método para crear un comentario y guardarlo
+        /// </summary>
+        /// <param name="comentario"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> CrearComentario(Comentario comentario)
+        {
+            try
+            {
+                var errorMessage = "";
+                ClaimsPrincipal claimUser = HttpContext.User;
+                string nombreUsuario = "";
+                Usuario usuario = null;
+                if (claimUser.Identity.IsAuthenticated)
+                {
+                    nombreUsuario = claimUser.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
+                }
+                string apiUrl1 = "https://localhost:7289/api/Controlador_Gestion/ObtenerUsuarioNombre/" + nombreUsuario;
+                using (HttpClient client = new HttpClient())
+                {
+                    try
                     {
-                        comentario.UsuarioId = usuario.id_usuario;
-                        string apiUrl = "https://localhost:7289/api/Controlador_Usuario/CrearComentario";
+                        HttpResponseMessage response = await client.GetAsync(apiUrl1);
 
-                        // para convertir el usuario a json y poder pasarselo a la API
-                        string jsoncomentario = JsonConvert.SerializeObject(comentario);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string responseBody = await response.Content.ReadAsStringAsync();
 
-                        // contenido de la petición
-                        StringContent content = new StringContent(jsoncomentario, Encoding.UTF8, "application/json");
-
-                        // peticion con la url y el contenido que se le manda al post y guarda el mensaje de respuesta
-                        HttpResponseMessage response1 = await httpClient.PostAsync(apiUrl, content);
-                        string responseBody = await response1.Content.ReadAsStringAsync();
-                        var errorObject = JsonConvert.DeserializeObject<dynamic>(responseBody);
-                        if (errorObject != null)
-                        {
-                            errorMessage = errorObject.mensaje;
-                        }
-                        // con el mensaje de respuesta muestra la vista
-                        if (response.IsSuccessStatusCode)// si se ha registrado correctamente me manda a la vista de registro exitoso
-                        {
-                            // Registro exitoso
-                            return RedirectToAction("ParaTi", "Home");
-                        }
-                        else if (response.StatusCode == HttpStatusCode.Conflict)//si hay algun mensaje de conflicto email/alias
-                        {
-                            //muestro la vista con el error
-                            return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
+                            // Deserializar la respuesta JSON en una lista de usuarios
+                            usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
                         }
                         else
                         {
-                            // para otro error no controlado
+                            Console.WriteLine($"Error al obtener los usuarios. Código de estado: {response.StatusCode}");
+                        }
+                        using (HttpClient httpClient = new HttpClient())
+                        {
+                            comentario.UsuarioId = usuario.id_usuario;
+                            string apiUrl = "https://localhost:7289/api/Controlador_Usuario/CrearComentario";
 
-                            return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
+                            // para convertir el usuario a json y poder pasarselo a la API
+                            string jsoncomentario = JsonConvert.SerializeObject(comentario);
+
+                            // contenido de la petición
+                            StringContent content = new StringContent(jsoncomentario, Encoding.UTF8, "application/json");
+
+                            // peticion con la url y el contenido que se le manda al post y guarda el mensaje de respuesta
+                            HttpResponseMessage response1 = await httpClient.PostAsync(apiUrl, content);
+                            string responseBody = await response1.Content.ReadAsStringAsync();
+                            var errorObject = JsonConvert.DeserializeObject<dynamic>(responseBody);
+                            if (errorObject != null)
+                            {
+                                errorMessage = errorObject.mensaje;
+                            }
+                            // con el mensaje de respuesta muestra la vista
+                            if (response.IsSuccessStatusCode)// si se ha registrado correctamente me manda a la vista de registro exitoso
+                            {
+                                // Registro exitoso
+                                return RedirectToAction("ParaTi", "Home");
+                            }
+                            else if (response.StatusCode == HttpStatusCode.Conflict)//si hay algun mensaje de conflicto email/alias
+                            {
+                                //muestro la vista con el error
+                                return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
+                            }
+                            else
+                            {
+                                // para otro error no controlado
+
+                                return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
+                            }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
+                    catch (Exception ex)
+                    {
+                        return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                return View("ErrorPersonalizado", "Home");
             }
+        }
     }
 }

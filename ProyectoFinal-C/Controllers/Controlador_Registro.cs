@@ -20,6 +20,11 @@ namespace ProyectoFinal_C.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// Método para envair el correo de confirmacion de registro una vez se registra
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public async Task<IActionResult> ConfirmacionRegistro(string email)
         {
             try
@@ -48,6 +53,11 @@ namespace ProyectoFinal_C.Controllers
                 return View("ErrorPersonalizado", "Home");
             }
         }
+        /// <summary>
+        /// Método para registrar un usuario y añadirle una foto de perfil por default
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> RegistrarUsuario(Usuario usuario)
         {

@@ -19,6 +19,10 @@ namespace ProyectoFinal_C.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// Método para mostrar el index de admin si entras como admin
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> IndexAdmin()
         {
             ClaimsPrincipal claimUser = HttpContext.User;
@@ -31,6 +35,11 @@ namespace ProyectoFinal_C.Controllers
             ViewData["nombreUsuario"] = nombreUsuario;
             return View();
         }
+        /// <summary>
+        /// Método para registrar un usuario como admin
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> RegistrarUsuario(Usuario usuario)
         {
@@ -67,21 +76,14 @@ namespace ProyectoFinal_C.Controllers
                         // Registro exitoso
                         return RedirectToAction("RegistroExitosoAdmin", "Controlador_Admin");
                     }
-                    else if (response.StatusCode == HttpStatusCode.Conflict)//si hay algun mensaje de conflicto email/alias
+                    else
                     {
                         //guardo el mensaje de error que me ha mandado
                         string errorMessage = await response.Content.ReadAsStringAsync();
-                        //lo añado al modelState para poder mostrarlo por la vista
-                        ModelState.AddModelError(string.Empty, errorMessage);
                         //muestro la vista con el error
-                        return View("~/Views/Home/Registro.cshtml", usuario);
+                        return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
                     }
-                    else
-                    {
-                        // para otro error no controlado
 
-                        return View("ErrorPersonalizado", "Home");
-                    }
                 }
             }
             catch (Exception ex)
@@ -89,6 +91,10 @@ namespace ProyectoFinal_C.Controllers
                 return RedirectToAction("ErrorPersonalizado", "Home");
             }
         }
+        /// <summary>
+        /// Método para mostrar la vista de gestion de usuarios
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> GestionUsuarios()
         {
             string apiUrl = "https://localhost:7289/api/Controlador_Gestion";
@@ -107,17 +113,22 @@ namespace ProyectoFinal_C.Controllers
                     }
                     else
                     {
-                        Console.WriteLine($"Error al obtener los usuarios. Código de estado: {response.StatusCode}");
+                        string errorMessage = await response.Content.ReadAsStringAsync();
+                        return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    return View();
+                    return View("ErrorPersonalizado", "Home");
                 }
             }
             return View(usuarios);
         }
+        /// <summary>
+        /// Método para mostrar la vista de gestión de posts
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> GestionPosts()
         {
             string apiUrl = "https://localhost:7289/api/Controlador_Gestion/AllPosts";
@@ -136,48 +147,55 @@ namespace ProyectoFinal_C.Controllers
                     }
                     else
                     {
-                        Console.WriteLine($"Error al obtener los post. Código de estado: {response.StatusCode}");
+                        string errorMessage = await response.Content.ReadAsStringAsync();
+                        return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    return View();
+                    return View("ErrorPersonalizado", "Home");
                 }
             }
             return View(posts);
         }
+        /// <summary>
+        /// Método para borrar un post por su id
+        /// </summary>
+        /// <param name="idPost"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> BorrarPost(string idPost)
         {
-            string errorMessage;
-                string apiUrl3 = $"https://localhost:7289/api/Controlador_Gestion/BorrarPost/" + idPost;
-                using (HttpClient client = new HttpClient())
+
+            string apiUrl3 = $"https://localhost:7289/api/Controlador_Gestion/BorrarPost/" + idPost;
+            using (HttpClient client = new HttpClient())
+            {
+                try
                 {
-                    try
+                    HttpResponseMessage response = await client.DeleteAsync(apiUrl3);
+                    if (response.IsSuccessStatusCode)
                     {
-                        HttpResponseMessage response = await client.DeleteAsync(apiUrl3);
-                        if (response.IsSuccessStatusCode)
-                        {
-                            string responseBody = await response.Content.ReadAsStringAsync();
-                            // Pasar el usuario a la vista de edición
-                            return RedirectToAction("GestionPosts", "Controlador_Admin");
-                        }
-                        else
-                        {
-                            // Manejar el caso en el que la solicitud a la API no sea exitosa
-                            // Aquí puedes devolver una vista de error o manejar el error de otra manera
-                            return NotFound();
-                        }
+                        string responseBody = await response.Content.ReadAsStringAsync();
+
+                        return RedirectToAction("GestionPosts", "Controlador_Admin");
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        // Manejar excepciones si ocurren durante la solicitud HTTP
-                        // Aquí puedes devolver una vista de error o manejar el error de otra manera
-                        return RedirectToAction("ErrorPersonalizado", "Home");
+                        string errorMessage = await response.Content.ReadAsStringAsync();
+                        return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
                     }
                 }
+                catch (Exception ex)
+                {
+                    return RedirectToAction("ErrorPersonalizado", "Home");
+                }
+            }
         }
+        /// <summary>
+        /// Método para mostrar la vista de editar usuarios
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> EditarUsuario()
         {
             int id;
@@ -208,14 +226,14 @@ namespace ProyectoFinal_C.Controllers
                     }
                     catch (Exception ex)
                     {
-                        errorMessage = "[ERROR-EditarUsuario()]Error al editar el usuario";
+                        errorMessage = "Error al editar el usuario";
                         return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
                     }
                 }
             }
             else
             {
-                errorMessage = "[ERROR-EditarUsuario()]Error al convertir el usuario";
+                errorMessage = "Error al convertir el usuario";
                 return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
             }
         }
@@ -223,111 +241,128 @@ namespace ProyectoFinal_C.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// Método para guardar cambios o borrar dependiendo de la accion
+        /// </summary>
+        /// <param name="usuarioFormulario"></param>
+        /// <param name="accion"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> GuardarCambios(Usuario usuarioFormulario, string accion, string id)
         {
-            int id_usuario = int.Parse(id);
-            Usuario usuarioBBDD;
-            if (accion == "guardar")
+            try
             {
-                string apiUrl1 = $"https://localhost:7289/api/Controlador_Gestion/" + id_usuario;
-                using (HttpClient client = new HttpClient())
+                int id_usuario = int.Parse(id);
+                Usuario usuarioBBDD;
+                if (accion == "guardar")//si es guardar
                 {
+                    string apiUrl1 = $"https://localhost:7289/api/Controlador_Gestion/" + id_usuario;
+                    using (HttpClient client = new HttpClient())
+                    {
+                        try
+                        {
+                            HttpResponseMessage response = await client.GetAsync(apiUrl1);
+                            if (response.IsSuccessStatusCode)
+                            {
+                                string responseBody = await response.Content.ReadAsStringAsync();
+                                // Deserializar la respuesta JSON en un objeto de tipo Usuario
+                                usuarioBBDD = JsonConvert.DeserializeObject<Usuario>(responseBody);
+                            }
+                            else
+                            {
+                                // Manejar el caso en el que la solicitud a la API no sea exitosa
+                                // Aquí puedes devolver una vista de error o manejar el error de otra manera
+                                return NotFound();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Manejar excepciones si ocurren durante la solicitud HTTP
+                            // Aquí puedes devolver una vista de error o manejar el error de otra manera
+                            return View("Error");
+                        }
+                    }
+
                     try
                     {
-                        HttpResponseMessage response = await client.GetAsync(apiUrl1);
-                        if (response.IsSuccessStatusCode)
+                        var usuarioEditado = new Usuario//camnbio los datros del usuario
                         {
-                            string responseBody = await response.Content.ReadAsStringAsync();
-                            // Deserializar la respuesta JSON en un objeto de tipo Usuario
-                            usuarioBBDD = JsonConvert.DeserializeObject<Usuario>(responseBody);
-                        }
-                        else
+                            alias_usuario = usuarioFormulario.alias_usuario,
+                            email_usuario = usuarioFormulario.email_usuario,
+                            movil_usuario = usuarioFormulario.movil_usuario,
+                            nombreCompleto_usuario = usuarioFormulario.nombreCompleto_usuario,
+                            id_usuario = usuarioBBDD.id_usuario,
+                            passwd_usuario = usuarioBBDD.passwd_usuario,
+                            rol_usuario = usuarioBBDD.rol_usuario
+                        };
+                        using (HttpClient httpClient = new HttpClient())
                         {
-                            // Manejar el caso en el que la solicitud a la API no sea exitosa
-                            // Aquí puedes devolver una vista de error o manejar el error de otra manera
-                            return NotFound();
+                            string apiUrl2 = "https://localhost:7289/api/Controlador_Gestion/EditarUsuario";
+                            string jsonUsuario = JsonConvert.SerializeObject(usuarioEditado);
+                            StringContent content = new StringContent(jsonUsuario, Encoding.UTF8, "application/json");
+                            HttpResponseMessage response = await httpClient.PostAsync(apiUrl2, content);
+                            if (response.IsSuccessStatusCode)
+                            {
+                                // Editarr exitoso
+                                return RedirectToAction("EditarExitoso", "Controlador_Admin");
+                            }
+                            else if (response.StatusCode == HttpStatusCode.Conflict)//si hay algun mensaje de conflicto email/alias
+                            {
+                                //muestro la vista con el error
+                                return View("ErrorPersonalizado", "Home");
+                            }
+                            else
+                            {
+                                // para otro error no controlado
+
+                                return View("ErrorPersonalizado", "Home");
+                            }
                         }
                     }
                     catch (Exception ex)
                     {
-                        // Manejar excepciones si ocurren durante la solicitud HTTP
-                        // Aquí puedes devolver una vista de error o manejar el error de otra manera
-                        return View("Error");
-                    }
-                }
-
-                try
-                {
-                    var usuarioEditado = new Usuario
-                    {
-                        alias_usuario = usuarioFormulario.alias_usuario,
-                        email_usuario = usuarioFormulario.email_usuario,
-                        movil_usuario = usuarioFormulario.movil_usuario,
-                        nombreCompleto_usuario = usuarioFormulario.nombreCompleto_usuario,
-                        id_usuario = usuarioBBDD.id_usuario,
-                        passwd_usuario = usuarioBBDD.passwd_usuario,
-                        rol_usuario = usuarioBBDD.rol_usuario
-                    };
-                    using (HttpClient httpClient = new HttpClient())
-                    {
-                        string apiUrl2 = "https://localhost:7289/api/Controlador_Gestion/EditarUsuario";
-                        string jsonUsuario = JsonConvert.SerializeObject(usuarioEditado);
-                        StringContent content = new StringContent(jsonUsuario, Encoding.UTF8, "application/json");
-                        HttpResponseMessage response = await httpClient.PostAsync(apiUrl2, content);
-                        if (response.IsSuccessStatusCode)
-                        {
-                            // Editarr exitoso
-                            return RedirectToAction("EditarExitoso", "Controlador_Admin");
-                        }
-                        else if (response.StatusCode == HttpStatusCode.Conflict)//si hay algun mensaje de conflicto email/alias
-                        {
-                            //muestro la vista con el error
-                            return View("ErrorPersonalizado", "Home");
-                        }
-                        else
-                        {
-                            // para otro error no controlado
-
-                            return View("ErrorPersonalizado", "Home");
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return RedirectToAction("ErrorPersonalizado", "Home");
-                }
-            }
-            else if (accion == "borrar")
-            {
-                string apiUrl3 = $"https://localhost:7289/api/Controlador_Gestion/EliminarUsuario/" + id_usuario;
-                using (HttpClient client = new HttpClient())
-                {
-                    try
-                    {
-                        HttpResponseMessage response = await client.DeleteAsync(apiUrl3);
-                        if (response.IsSuccessStatusCode)
-                        {
-                            string responseBody = await response.Content.ReadAsStringAsync();
-                            // Pasar el usuario a la vista de edición
-                            return RedirectToAction("EditarExitoso", "Controlador_Admin");
-                        }
-                        else
-                        {
-                            // Manejar el caso en el que la solicitud a la API no sea exitosa
-                            // Aquí puedes devolver una vista de error o manejar el error de otra manera
-                            return NotFound();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        // Manejar excepciones si ocurren durante la solicitud HTTP
-                        // Aquí puedes devolver una vista de error o manejar el error de otra manera
                         return RedirectToAction("ErrorPersonalizado", "Home");
                     }
                 }
+                else if (accion == "borrar")//si es borrar
+                {
+                    string apiUrl3 = $"https://localhost:7289/api/Controlador_Gestion/EliminarUsuario/" + id_usuario;
+                    using (HttpClient client = new HttpClient())
+                    {
+                        try
+                        {
+                            HttpResponseMessage response = await client.DeleteAsync(apiUrl3);
+                            if (response.IsSuccessStatusCode)
+                            {
+                                string responseBody = await response.Content.ReadAsStringAsync();
+                                
+                                return RedirectToAction("EditarExitoso", "Controlador_Admin");
+                            }
+                            else
+                            {
+                                // Manejar el caso en el que la solicitud a la API no sea exitosa
+                                // Aquí puedes devolver una vista de error o manejar el error de otra manera
+                                return NotFound();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Manejar excepciones si ocurren durante la solicitud HTTP
+                            // Aquí puedes devolver una vista de error o manejar el error de otra manera
+                            return RedirectToAction("ErrorPersonalizado", "Home");
+                        }
+                    }
+                }
+                else { return RedirectToAction("ErrorPersonalizado", "Home"); }
             }
-            else { return RedirectToAction("ErrorPersonalizado", "Home"); }
-        }
+            catch (Exception ex)
+            {
+                return View("ErrorPersonalizado", "Home");
+            }
+
+
+    }
     }
 }

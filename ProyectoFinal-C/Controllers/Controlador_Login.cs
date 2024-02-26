@@ -17,6 +17,11 @@ namespace ProyectoFinal_C.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// Método de inicio de sesión con usuario y contraseña
+        /// </summary>
+        /// <param name="usuarioLogin"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> InicioSesion(Usuario usuarioLogin)
         {
@@ -44,6 +49,7 @@ namespace ProyectoFinal_C.Controllers
                     //le envio la solicitud y espero a la respuesta
                     HttpResponseMessage response = await client.PostAsync(apiBaseUrl, content);
                     string responseBody = await response.Content.ReadAsStringAsync();
+                    //Lo tuve que deserializar asi porque me daba error con el json
                     UsuarioResponse usuarioResponse = JsonConvert.DeserializeObject<UsuarioResponse>(responseBody);
 
 
@@ -52,6 +58,7 @@ namespace ProyectoFinal_C.Controllers
                     {
                         Usuario usuarioEncontrado = usuarioResponse.Usuario;
                         Console.WriteLine(responseBody);
+                        //añado el nombre a la lista de claims
                         List<Claim> claims = new List<Claim>()
                         {
                             new Claim(ClaimTypes.Name,usuarioEncontrado.nombreCompleto_usuario)
@@ -71,20 +78,16 @@ namespace ProyectoFinal_C.Controllers
                         if (usuarioEncontrado.rol_usuario == "ADMIN") {
                             return RedirectToAction("IndexAdmin","Controlador_Admin");
                         }
+                        Utils.Utils.Log("Se ha iniciado sesion con el usuario:"+ usuarioEncontrado.email_usuario);
                         return RedirectToAction("Index", "Home");
                     }
-                    else if(response.StatusCode == HttpStatusCode.Conflict)
+                    else
                     {
                         //guardo el mensaje de error que me ha mandado
                         string errorMessage = await response.Content.ReadAsStringAsync();
                         //lo añado al modelState para poder mostrarlo por la vista
-                        ModelState.AddModelError(string.Empty, errorMessage);
                         //muestro la vista con el error
-                        return View("~/Views/Controlador_Login/Login.cshtml", usuarioLogin);
-                    }
-                    else
-                    {                       
-                        return RedirectToAction("ErrorPersonalizado", "Home");
+                        return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
                     }
                 }
             }

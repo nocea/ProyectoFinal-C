@@ -14,44 +14,55 @@ namespace ProyectoFinal_C.Controllers
     {
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
-            if (!context.HttpContext.User.Identity.IsAuthenticated)
+            try
             {
-                context.Result = new UnauthorizedResult();
-                return;
-            }
-            // Obtener el rol del usuario actual
-            var claimsIdentity = context.HttpContext.User.Identity as ClaimsIdentity;
-            string nombreUsuario = claimsIdentity.Name;
-            Usuario usuario;
-            string rol_usuario;
-            string apiUrl1 = "https://localhost:7289/api/Controlador_Admin/ObtenerUsuarioNombre/" + nombreUsuario;
-            using (HttpClient client = new HttpClient())
-            {
-
-                HttpResponseMessage response = await client.GetAsync(apiUrl1);
-                if (response.IsSuccessStatusCode)
+                if (!context.HttpContext.User.Identity.IsAuthenticated)
                 {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-
-                    // Deserializar la respuesta JSON en una lista de usuarios
-                    usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
-                    rol_usuario = usuario.rol_usuario;
-                    if (rol_usuario != "ADMIN")
-                    {
-                        // Si el usuario no tiene el rol "ADMIN", denegar el acceso
-                        context.Result = new ForbidResult();
-                        return;
-                    }
-
-                }
-                else
-                {
-                    // Manejar errores al obtener el usuario de la base de datos
-                    Console.WriteLine($"Error al obtener el usuario. Código de estado: {response.StatusCode}");
-                    context.Result = new StatusCodeResult((int)response.StatusCode);
+                    context.Result = new UnauthorizedResult();
                     return;
                 }
+                // Obtener el rol del usuario actual
+                var claimsIdentity = context.HttpContext.User.Identity as ClaimsIdentity;
+                string nombreUsuario = claimsIdentity.Name;
+                Usuario usuario;
+                string rol_usuario;
+                string apiUrl1 = "https://localhost:7289/api/Controlador_Gestion/ObtenerUsuarioNombre/" + nombreUsuario;
+                using (HttpClient client = new HttpClient())
+                {
+
+                    HttpResponseMessage response = await client.GetAsync(apiUrl1);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+
+                        // Deserializar la respuesta JSON en una lista de usuarios
+                        usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
+                        rol_usuario = usuario.rol_usuario;
+                        if (rol_usuario != "ADMIN")
+                        {
+                            // Si el usuario no tiene el rol "ADMIN", denegar el acceso
+                            context.Result = new ForbidResult();
+                            return;
+                        }
+
+                    }
+                    else
+                    {
+                        // Manejar errores al obtener el usuario de la base de datos
+                        Console.WriteLine($"Error al obtener el usuario. Código de estado: {response.StatusCode}");
+                        context.Result = new StatusCodeResult((int)response.StatusCode);
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Loguear el error (aquí podrías registrar la excepción en un registro o log)
+                Console.WriteLine($"Error en la autorización: {ex.Message}");
+
+                // Redirigir a la vista de error
+                context.Result = new RedirectToActionResult("ErrorPersonalizado", "Home", null);
             }
         }
     }
-}
+    }

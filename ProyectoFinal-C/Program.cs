@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using ProyectoFinal_C.Utils;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -44,5 +45,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Controlador_Login}/{action=Login}/{id?}");
-
+Utils.Log("Se ha iniciado el proyecto");
 app.Run();

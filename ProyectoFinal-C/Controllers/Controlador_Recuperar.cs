@@ -26,6 +26,11 @@ namespace ProyectoFinal_C.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// Método que recibe un email y manda un correo a ese email y asi poder cambiar la contraseña
+        /// </summary>
+        /// <param name="usuarioRecuperar"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> RecuperarContrasena(Usuario usuarioRecuperar)
         {
@@ -56,19 +61,14 @@ namespace ProyectoFinal_C.Controllers
                         
                         return RedirectToAction("EnviadoRecuperar", "Controlador_Recuperar");
                     }
-                    else if (response.StatusCode == HttpStatusCode.Conflict)
+                    else
                     {
                         
                         string errorMessage = await response.Content.ReadAsStringAsync();
                         
-                        ModelState.AddModelError(string.Empty, errorMessage);
                         
-                        return View("~/Views/Controlador_Recuperar/RecuperarContraseña.cshtml", usuarioRecuperar);
-                    }
-                    else
-                    {
                         
-                        return View("ErrorPersonalizado", "Home");
+                        return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
                     }
                 }
             }
@@ -77,6 +77,13 @@ namespace ProyectoFinal_C.Controllers
                 return RedirectToAction("ErrorPersonalizado", "Home");
             }
         }     
+        /// <summary>
+        /// Método para cambiar la contraseña si es valido el token y por el enlace que le he mandado anteriormente
+        /// </summary>
+        /// <param name="usuarioContrasenaNueva"></param>
+        /// <param name="email"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CambiarContrasena(Usuario usuarioContrasenaNueva,string email, string token)
         {

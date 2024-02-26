@@ -1,8 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Login";
-}
-
-@using Newtonsoft.Json.Linq
+﻿@using Newtonsoft.Json.Linq
 @model ProyectoFinal_C.Models.Usuario
 
 <!DOCTYPE html>
@@ -36,21 +32,6 @@
             <a asp-controller="Controlador_Recuperar" asp-action="RecuperarContraseña" class="btn btn-link">¿Olvidaste tu contraseña?</a>
             <a asp-controller="Controlador_Registro" asp-action="Registro" class="btn btn-link">¿No se ha registrado?</a>
         </form>
-        @if (!ViewData.ModelState.IsValid)
-        {
-            <div>
-                <ul>
-                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                    {
-                        var errorMessage = JObject.Parse(error.ErrorMessage)["mensaje"]?.ToString();
-                        if (!string.IsNullOrEmpty(errorMessage))
-                        {
-                            <li>@errorMessage</li>
-                        }
-                    }
-                </ul>
-            </div>
-        }
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
