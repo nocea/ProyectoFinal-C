@@ -118,6 +118,66 @@ namespace ProyectoFinal_C.Controllers
             }
             return View(usuarios);
         }
+        public async Task<IActionResult> GestionPosts()
+        {
+            string apiUrl = "https://localhost:7289/api/Controlador_Gestion/AllPosts";
+            List<Post> posts = new List<Post>();
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+
+                        // Deserializar la respuesta JSON en una lista de usuarios
+                        posts = JsonConvert.DeserializeObject<List<Post>>(responseBody);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error al obtener los post. Código de estado: {response.StatusCode}");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return View();
+                }
+            }
+            return View(posts);
+        }
+        [HttpPost]
+        public async Task<IActionResult> BorrarPost(string idPost)
+        {
+            string errorMessage;
+                string apiUrl3 = $"https://localhost:7289/api/Controlador_Gestion/BorrarPost/" + idPost;
+                using (HttpClient client = new HttpClient())
+                {
+                    try
+                    {
+                        HttpResponseMessage response = await client.DeleteAsync(apiUrl3);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string responseBody = await response.Content.ReadAsStringAsync();
+                            // Pasar el usuario a la vista de edición
+                            return RedirectToAction("GestionPosts", "Controlador_Admin");
+                        }
+                        else
+                        {
+                            // Manejar el caso en el que la solicitud a la API no sea exitosa
+                            // Aquí puedes devolver una vista de error o manejar el error de otra manera
+                            return NotFound();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Manejar excepciones si ocurren durante la solicitud HTTP
+                        // Aquí puedes devolver una vista de error o manejar el error de otra manera
+                        return RedirectToAction("ErrorPersonalizado", "Home");
+                    }
+                }
+        }
         public async Task<IActionResult> EditarUsuario()
         {
             int id;
@@ -208,7 +268,7 @@ namespace ProyectoFinal_C.Controllers
                         id_usuario = usuarioBBDD.id_usuario,
                         passwd_usuario = usuarioBBDD.passwd_usuario,
                         rol_usuario = usuarioBBDD.rol_usuario
-                    };  
+                    };
                     using (HttpClient httpClient = new HttpClient())
                     {
                         string apiUrl2 = "https://localhost:7289/api/Controlador_Gestion/EditarUsuario";

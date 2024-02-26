@@ -24,6 +24,8 @@ namespace ProyectoFinal_C.Models
         public string? email_usuario { get; set; }
         [JsonProperty("passwd_usuario")]
         public string? passwd_usuario { get; set; }
+        [JsonIgnore]
+        public IFormFile ImagenFile { get; set; }
         [JsonProperty("imagen_usuario")]
         public byte[]? imagen_usuario { get; set; }
         [JsonProperty("registrado")]

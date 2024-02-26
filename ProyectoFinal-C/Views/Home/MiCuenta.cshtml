@@ -67,6 +67,16 @@
                 <p><strong>Teléfono:</strong> @Model.movil_usuario</p>
                 <p><strong>Contraseña:</strong> *********</p>
             </div>
+            <form asp-controller="Home" asp-action="CambiarImagen" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="usuario.ImagenFile" class="btn btn-primary">
+                    Seleccionar imagen
+                    <input type="file" id="usuario.ImagenFile" name="usuario.ImagenFile" class="d-none">
+                </label>
+            </div>
+            <input type="hidden" name="usuario.id_usuario" value="@Model.id_usuario" />
+            <button type="submit" class="btn btn-dark">Subir Imagen</button>
+        </form>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

@@ -60,8 +60,70 @@ namespace ProyectoFinal_C.Controllers
             }
             return View(usuario);
         }
+        [HttpPost]
+        public async Task<IActionResult> CambiarImagen(Usuario usuario)
+        {
+            string errorMessage = null;
+            try
+            {
+                if (usuario.ImagenFile != null && usuario.ImagenFile.Length > 0)
+                {
+                    // Leer la imagen en un array de bytes
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await usuario.ImagenFile.CopyToAsync(memoryStream);
+                        usuario.imagen_usuario = memoryStream.ToArray();
+                    }
+                }
+                var nuevoUsuario = new Usuario
+                {
+                    id_usuario = usuario.id_usuario,
+                    imagen_usuario=usuario.imagen_usuario                    
+                };
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    string apiUrl = "https://localhost:7289/api/Controlador_Usuario/CambiarImagen";
 
-        public async Task<IActionResult> Index()
+                    // para convertir el usuario a json y poder pasarselo a la API
+                    string jsonUsuario = JsonConvert.SerializeObject(nuevoUsuario);
+
+                    // contenido de la petición
+                    StringContent content = new StringContent(jsonUsuario, Encoding.UTF8, "application/json");
+
+                    // peticion con la url y el contenido que se le manda al post y guarda el mensaje de respuesta
+                    HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    var errorObject = JsonConvert.DeserializeObject<dynamic>(responseBody);
+                    if (errorObject != null)
+                    {
+                        errorMessage = errorObject.mensaje;
+                    }
+                    // con el mensaje de respuesta muestra la vista
+                    if (response.IsSuccessStatusCode)// si se ha registrado correctamente me manda a la vista de registro exitoso
+                    {
+                        // Registro exitoso
+                        return RedirectToAction("MiCuenta", "Home");
+                    }
+                    else if (response.StatusCode == HttpStatusCode.Conflict)//si hay algun mensaje de conflicto email/alias
+                    {
+                        //muestro la vista con el error
+                        return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
+                    }
+                    else
+                    {
+                        // para otro error no controlado
+
+                        return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
+            }
+        }
+
+            public async Task<IActionResult> Index()
         {
             ClaimsPrincipal claimUser = HttpContext.User;
             string nombreUsuario = "";
@@ -199,9 +261,10 @@ namespace ProyectoFinal_C.Controllers
                 return View("~/Views/Home/ErrorPersonalizado.cshtml", errorMessage);
             }
         }
-        public async Task<IActionResult> ComentarPostAsync()
+        public async Task<IActionResult> ComentarPostAsync(string idPost)
         {
-            string apiUrl1 = "https://localhost:7289/api/Controlador_Usuario/AllComentarios";
+            
+            string apiUrl1 = "https://localhost:7289/api/Controlador_Usuario/AllComentarios/"+ idPost;
             List<Comentario> comentarios = new List<Comentario>();
             using (HttpClient client = new HttpClient())
             {

@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/layoutAdmin.cshtml";
+}
+@model List<Post>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Post</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .small-image {
+            max-width: 100px;
+            max-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Post</h1>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Imagen</th>
+                <th>Pie de imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var post in Model)
+            {
+
+                <tr>
+                    <td>@post.id_post</td>
+                    <td>@post.titulo_post</td>
+                    @if (post.imagen_post != null && post.imagen_post.Length > 0)
+                    {
+                        <td><img src="data:image/jpeg;base64,@Convert.ToBase64String(post.imagen_post)" alt="Imagen de perfil" class="small-image" /></td>
+                    }
+                    else
+                    {
+                        <td><p>No se encontró ninguna imagen para mostrar.</p></td>
+                    }
+                    <td>@post.pie_post</td>
+                    <td>
+                        <form method="post" action="/Controlador_Admin/BorrarPost">
+                            <input type="hidden" name="idPost" value="@post.id_post" />
+                            <button type="submit" class="btn btn-danger">Borrar</button>
+                        </form>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>
+
